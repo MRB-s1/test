@@ -1,0 +1,25 @@
+import requests
+
+# Replace 'your_api_token_here' with your actual SentinelOne API token
+api_token = 'your_api_token_here'
+# Replace 'your_sentinelone_instance_url_here' with your SentinelOne instance URL
+api_url = 'https://your_sentinelone_instance_url_here/web/api/v2.1/agents'
+
+headers = {
+    'Authorization': f'ApiToken {api_token}',
+    'Content-Type': 'application/json'
+}
+
+def validate_connectivity():
+    try:
+        response = requests.get(api_url, headers=headers)
+        # Check if the response status code is 200 (OK)
+        if response.status_code == 200:
+            print("Successfully connected to the SentinelOne API.")
+        else:
+            print(f"Failed to connect to the SentinelOne API. Status code: {response.status_code}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+if __name__ == "__main__":
+    validate_connectivity()
